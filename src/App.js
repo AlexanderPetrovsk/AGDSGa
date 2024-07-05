@@ -27,7 +27,7 @@ class App extends Component {
       products: data.data.products
     });
 
-    const res = await fetch('http://localhost:8000/graphql', {
+    const res = await fetch('https://ackata.000webhostapp.com/graphql', {
       method: 'POST',
       headers: {
         "Content-Type": "application/json"
