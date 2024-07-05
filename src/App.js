@@ -29,17 +29,14 @@ class App extends Component {
 
     const res = await fetch('https://ackata.000webhostapp.com/graphql', {
       method: 'POST',
-      headers: {
-        "Content-Type": "application/json"
-      },
       body: JSON.stringify({
         query: `
           query {
-            echo
+            getProducts
             {
-              id,
+              id, 
               name,
-              in_stock,
+              inStock,
               gallery,
               description,
               category,
@@ -52,14 +49,10 @@ class App extends Component {
                       displayValue,
                       value,
                       id,
-                      attribute_id,
-                      ID_AI,
                       __typename
                   },
                   type,
-                  __typename,
-                  product_id,
-                  ID_A
+                  __typename
               },
               prices {
                   id,
@@ -71,19 +64,17 @@ class App extends Component {
                       symbol,
                       __typename
                   },
-                  product_id
               }
-              ID_P,
             }
           }
         `
       })
     });
-    
+
     const result = await res.json();
 
     this.setState({
-      products: result.data.echo
+      products: result.data.getProducts
     })
   }
 

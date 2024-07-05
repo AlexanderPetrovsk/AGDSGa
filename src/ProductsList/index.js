@@ -2,6 +2,15 @@ import { Component } from "react";
 import { Link } from "react-router-dom";
 
 class ProductsList extends Component {
+
+    getProductImage(product) {
+        if (typeof product.gallery == 'string') {
+            return JSON.parse(product.gallery)[0];
+        }
+
+        return product.gallery[0];
+    }
+
     render() {
         return (
             <div className="product-list-container">
@@ -11,7 +20,7 @@ class ProductsList extends Component {
                         return (
                             <Link to={'products/' + product.id}  key={product.id}>
                                 <div className="product-card-container" data-testid={`product-${product.name}`}>
-                                    <img className="product-image" src={product.gallery[0]} alt="" />
+                                    <img className="product-image" src={this.getProductImage(product)} alt="" />
                                     <div className="product-name">
                                         { product.name }
                                     </div>
