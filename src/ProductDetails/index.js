@@ -2,6 +2,7 @@ import { Component } from "react";
 import data from "../data.json";
 import Sizes from "./components/sizes";
 import Colors from "./components/colors";
+import { toKebabCase } from "../services/common";
 import leftArrow from "../assets/left-arrow.svg";
 import rightArrow from "../assets/right-arrow.svg";
 
@@ -57,9 +58,19 @@ class ProductDetails extends Component {
         switch(id) {
             case 'Capacity':
             case 'Size':
-                return <Sizes sizes={items} attributeId={id} onHandleAttributeChange={this.handleChangeAttribute} />
+                return <Sizes
+                    sizes={items}
+                    attributeId={id}
+                    usedIn="details"
+                    onHandleAttributeChange={this.handleChangeAttribute}
+                />
             case 'Color':
-                return <Colors sizes={items} attributeId={id} onHandleAttributeChange={this.handleChangeAttribute} />
+                return <Colors
+                    sizes={items}
+                    attributeId={id}
+                    usedIn="details"
+                    onHandleAttributeChange={this.handleChangeAttribute}
+                />
             default:
                 break;
         }
@@ -133,7 +144,7 @@ class ProductDetails extends Component {
                                     <div
                                         className="product-details-attribute"
                                         key={index}
-                                        data-testid={`product-attribute-${attribute.id}`}
+                                        data-testid={`product-attribute-${toKebabCase(attribute.id)}`}
                                     >
                                         <div className="attribute-title">{ attribute.id.toUpperCase() }:</div>
                                         {this.renderAttributes(attribute.id, attribute.items)}
@@ -147,7 +158,14 @@ class ProductDetails extends Component {
                                 { this.state.product.prices[0].currency.symbol }{ this.state.product.prices[0].amount }
                             </div>
                         </div>
-                        <button className="product-details-add-button" data-testid='add-to-cart' onClick={() => this.handleAddToCart() }>ADD TO CART</button>
+                        <button
+                            className="product-details-add-button"
+                            data-testid='add-to-cart'
+                            onClick={() => this.handleAddToCart() }
+                            disabled={!this.state.product.inStock}
+                        >
+                            ADD TO CART
+                        </button>
                         <div className="product-details-description" data-testid='product-description'>
                             { this.state.product.description }
                         </div>

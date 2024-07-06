@@ -195,7 +195,9 @@ body {
   margin-top: 10px;
   font-weight: 700;
 }
+
 .product-details-add-button {
+  cursor: pointer;
   color: #fff;
   background: #5ECE7B;
   border: none;
@@ -204,6 +206,16 @@ body {
   width: 20vw;
 }
 
+.product-details-add-button[disabled] {
+  opacity: 0.4;
+  cursor: not-allowed;
+  color: #fff;
+  background: #5ECE7B;
+  border: none;
+  margin: 15px 0 15px 0;
+  padding: 10px 32px 10px 32px;
+  width: 20vw;
+}
 
 /* cart overlay */
 

@@ -1,9 +1,10 @@
 import { Component } from "react";
-import Sizes from "../ProductDetails/components/sizes";
 import { Link } from "react-router-dom";
-import Colors from "../ProductDetails/components/colors";
 import mainLogo from "../assets/main-logo.svg";
 import cartLogo from "../assets/cart-logo.svg";
+import Sizes from "../ProductDetails/components/sizes";
+import Colors from "../ProductDetails/components/colors";
+import { toKebabCase } from "../services/common";
 
 class Header extends Component {
     handleCartClick() {
@@ -38,9 +39,21 @@ class Header extends Component {
         switch(id) {
             case 'Capacity':
             case 'Size':
-                return <Sizes sizes={items} attributeId={id} selectedAttribute={selectedAttribute} onHandleAttributeChange={ (id, value) => this.handleChangeAttribute(id, value, productIndex) } />
+                return <Sizes
+                    sizes={items}
+                    attributeId={id}
+                    selectedAttribute={selectedAttribute}
+                    usedIn="cart"
+                    onHandleAttributeChange={ (id, value) => this.handleChangeAttribute(id, value, productIndex) }
+                />
             case 'Color':
-                return <Colors sizes={items} attributeId={id} selectedAttribute={selectedAttribute} onHandleAttributeChange={ (id, value) => this.handleChangeAttribute(id, value, productIndex) } />
+                return <Colors
+                    sizes={items}
+                    attributeId={id}
+                    selectedAttribute={selectedAttribute}
+                    usedIn="cart"
+                    onHandleAttributeChange={ (id, value) => this.handleChangeAttribute(id, value, productIndex) }
+                />
             default:
                 break;
         }
@@ -58,6 +71,15 @@ class Header extends Component {
         this.props.onQuantityClick(index, action);
     }
 
+    cartTotal() {
+        let total = 0;
+
+        this.props.selectedProducts.forEach(product => {
+            total += parseInt(product.prices[0].amount);
+        });
+
+        return total;
+    }
     render() {
         return (
             <div className="header-container">
@@ -65,13 +87,14 @@ class Header extends Component {
                     <ul className="header-categories-list">
                         {this.props.categories.map(category => {
                             return (
-                                <li
+                                <Link to={category.name}
                                     className={this.getCategoryItemClasses(category.name)}
                                     onClick={(e) => this.handleCategoryClick(category.name, e)}
                                     key={category.name}
+                                    data-testid={`${this.props.selectedCategory === category.name ? 'active-' : ''}category-link`}
                                 >
                                     { category.name.toUpperCase() }
-                                </li>
+                                </Link>
                             )
                         })}
                     </ul>
@@ -115,7 +138,7 @@ class Header extends Component {
                                                 <div
                                                     className="product-details-attribute"
                                                     key={index}
-                                                    data-testid={`product-attribute-${attribute.id}`}
+                                                    data-testid={`cart-item-attribute-${toKebabCase(attribute.name)}`}
                                                 >
                                                     <div className="attribute-title">{ attribute.id.toUpperCase() }:</div>
                                                     {this.renderAttributes(attribute.id, attribute.items, index, product.selectedAttributes)}
@@ -125,11 +148,13 @@ class Header extends Component {
                                     </div>
                                 </div>
                                 <div className="quantity-container">
-                                    <div className="quantity-option" onClick={ () => this.handleQuantityClick(index, 'add') }>
+                                    <div className="quantity-option" onClick={ () => this.handleQuantityClick(index, 'add') } data-testid='cart-item-amount-increase'>
                                         +
                                     </div>
+                                    <div className="cart-item-amount" data-testid='cart-item-amount'>
                                         { product.quantity }
-                                    <div className="quantity-option" onClick={ () => this.handleQuantityClick(index, 'remove') }>
+                                    </div>
+                                    <div className="quantity-option" onClick={ () => this.handleQuantityClick(index, 'remove') } data-testid='cart-item-amount-decrease'>
                                         -
                                     </div>
                                 </div>
@@ -137,7 +162,9 @@ class Header extends Component {
                             </div>
                         )
                     })}
+                    <div className="cart-total" data-testid="cart-total">{this.cartTotal()}</div>
                     <div className="place-order-btn">Place Order</div>
+
                 </dialog>
             </div>
         )

@@ -1,4 +1,5 @@
 import { Component } from "react";
+import { toKebabCase } from "../../services/common";
 
 class Sizes extends Component {
     constructor(props) {
@@ -29,6 +30,14 @@ class Sizes extends Component {
             });
         }
     }
+    
+    dataTestId(itemValue, index) {
+        if (this.props.usedIn === 'cart') {
+            return `cart-item-attribute-size-${toKebabCase(itemValue)}${index === this.state.selectedAttribute ? '-selected' : ''}`;
+        }
+
+        return `product-attribute-size-${toKebabCase(itemValue)}${index === this.state.selectedAttribute ? '-selected' : ''}`;
+    }
 
     render() {
         return (
@@ -39,6 +48,7 @@ class Sizes extends Component {
                             className={this.getSizeOptionClasses(index)}
                             onClick={() => this.handleSelectAttribute(this.props.attributeId, item.value, index)}
                             key={index}
+                            data-testId={this.dataTestId(item.displayValue, index)}
                         >
                             { item.value }
                         </div>

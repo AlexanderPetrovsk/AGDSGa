@@ -1,4 +1,5 @@
 import { Component } from "react";
+import { toKebabCase } from "../../services/common";
 
 class Colors extends Component {
     constructor(props) {
@@ -30,6 +31,14 @@ class Colors extends Component {
         return `color-option-wrapper ${index === this.state.selectedAttribute ? 'active-color' : ''}`;
     }
 
+    dataTestId(itemValue, index) {
+        if (this.props.usedIn === 'cart') {
+            return `cart-item-attribute-size-${toKebabCase(itemValue)}${index === this.state.selectedAttribute ? '-selected' : ''}`;
+        }
+
+        return '';
+    }
+
     render() {
         return (
             <div className="color-options-container">
@@ -40,6 +49,7 @@ class Colors extends Component {
                                 className="color-option"
                                 style={{ backgroundColor: item.value }}
                                 onClick={() => this.handleSelectAttribute(this.props.attributeId, item.value, index)}
+                                data-testId={this.dataTestId(item.displayValue, index)}
                             />
                         </div>
                     )

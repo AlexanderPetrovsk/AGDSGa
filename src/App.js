@@ -196,7 +196,7 @@ class App extends Component {
           onChangeAttribute={this.handleAttributeChangeInCart}
         />
         <Routes>
-          <Route path='/' element={
+          <Route path='/*' element={
               <ProductsList 
                 selectedCategory={this.state.selectedCategory}
                 products={this.getFilteredProducts()}

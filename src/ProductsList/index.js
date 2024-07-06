@@ -1,5 +1,6 @@
 import { Component } from "react";
 import { Link } from "react-router-dom";
+import { toKebabCase } from "../services/common";
 import addToCart from "../assets/add-to-cart.svg";
 
 class ProductsList extends Component {
@@ -61,7 +62,7 @@ class ProductsList extends Component {
                             <Link to={'products/' + product.id}  key={product.id}>
                                 <div
                                     className="product-card-container"
-                                    data-testid={`product-${product.name}`}
+                                    data-testid={`product-${toKebabCase(product.name)}`}
                                     onMouseEnter={() => this.handleCardHover(true, index)}
                                     onMouseLeave={() => this.handleCardHover(false, index)}
                                 >
