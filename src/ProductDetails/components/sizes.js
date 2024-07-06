@@ -32,10 +32,10 @@ class Sizes extends Component {
     
     dataTestId(itemValue, itemId, index) {
         if (this.props.usedIn === 'cart') {
-            return `cart-item-attribute-${itemId.toLowerCase()}-${itemValue}${index === this.state.selectedAttribute ? '-selected' : ''}`;
+            return `cart-item-attribute-${this.props.attributeId.toLowerCase()}-${itemValue}${index === this.state.selectedAttribute ? '-selected' : ''}`;
         }
 
-        return `product-attribute-${itemId.toLowerCase()}-${itemValue}${index === this.state.selectedAttribute ? '-selected' : ''}`;
+        return `product-attribute-${this.props.attributeId.toLowerCase()}-${itemValue}${index === this.state.selectedAttribute ? '-selected' : ''}`;
     }
 
     render() {
