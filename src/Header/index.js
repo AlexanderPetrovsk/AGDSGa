@@ -75,10 +75,10 @@ class Header extends Component {
         let total = 0;
 
         this.props.selectedProducts.forEach(product => {
-            total += parseInt(product.prices[0].amount);
+            total = parseFloat(total) + parseFloat(product.prices[0].amount);
         });
 
-        return total;
+        return total.toFixed(2);
     }
 
     componentDidMount() {
@@ -176,7 +176,7 @@ class Header extends Component {
                             )
                         })}
                         <div className="cart-total" data-testid="cart-total">{this.cartTotal()}</div>
-                        <div className="place-order-btn">Place Order</div>
+                        <div className="place-order-btn" data-testid="place-order-btn">Place Order</div>
                     </div>
                 </dialog>
             </div>
