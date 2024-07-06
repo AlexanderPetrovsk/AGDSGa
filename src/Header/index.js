@@ -143,7 +143,7 @@ class Header extends Component {
                                             {product.name}
                                         </div>
                                         <div className="selected-item-price">
-                                            { product.prices[0].currency.symbol }{ product.prices[0].amount }
+                                            { product.prices[0].currency.symbol } { product.prices[0].amount }
                                         </div>
                                         <div className="selected-item-attributes">
                                             {product.attributes.map((attribute, index) => {
