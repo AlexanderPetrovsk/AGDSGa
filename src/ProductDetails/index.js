@@ -85,6 +85,7 @@ class ProductDetails extends Component {
     }
 
     handleAddToCart() {
+        document.getElementsByTagName('dialog')[0].showModal();
         this.props.onAddToCart(this.state.product, this.state.selectedAttributes);
     }
 
@@ -162,7 +163,7 @@ class ProductDetails extends Component {
                             className="product-details-add-button"
                             data-testid='add-to-cart'
                             onClick={() => this.handleAddToCart() }
-                            disabled={!this.state.product.inStock}
+                            disabled={!this.state.product.inStock && this.state.selectedAttributes.length !== this.state.product.attributes.length}
                         >
                             ADD TO CART
                         </button>
