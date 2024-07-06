@@ -132,7 +132,7 @@ class Header extends Component {
                 </div>
                 
                 <dialog >
-                    <div className="cart-overlay" data-testid='cart-btn' id="my-div">
+                    <div className="cart-overlay" data-testid='cart-overlay' id="my-div">
                         My bag {this.getNmItemsText()}
                         {this.props.selectedProducts.map((product, index) => {
                             return (
