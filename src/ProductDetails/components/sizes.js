@@ -48,7 +48,7 @@ class Sizes extends Component {
                             className={this.getSizeOptionClasses(index)}
                             onClick={() => this.handleSelectAttribute(this.props.attributeId, item.value, index)}
                             key={index}
-                            data-testId={this.dataTestId(item.displayValue, index)}
+                            data-testid={this.dataTestId(item.displayValue, index)}
                         >
                             { item.value }
                         </div>

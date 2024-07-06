@@ -49,7 +49,7 @@ class Colors extends Component {
                                 className="color-option"
                                 style={{ backgroundColor: item.value }}
                                 onClick={() => this.handleSelectAttribute(this.props.attributeId, item.value, index)}
-                                data-testId={this.dataTestId(item.displayValue, index)}
+                                data-testid={this.dataTestId(item.displayValue, index)}
                             />
                         </div>
                     )
