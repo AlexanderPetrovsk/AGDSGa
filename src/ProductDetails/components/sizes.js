@@ -10,14 +10,24 @@ class Sizes extends Component {
 
     }
     
-    handleSelectAttribute(id) {
+    handleSelectAttribute(id, value, index) {
+        this.props.onHandleAttributeChange(id, value);
+
         this.setState({
-            selectedAttribute: id
+            selectedAttribute: index
         });
     }
 
     getSizeOptionClasses(index) {
         return `size-option ${index === this.state.selectedAttribute ? 'active-attribute' : ''}`;
+    }
+
+    componentDidMount() {
+        if (this.props.selectedAttribute) {
+            this.setState({
+                selectedAttribute: this.props.sizes.findIndex(size => size.value === this.props.selectedAttribute.value)
+            });
+        }
     }
 
     render() {
@@ -27,7 +37,7 @@ class Sizes extends Component {
                     return (
                         <div
                             className={this.getSizeOptionClasses(index)}
-                            onClick={() => this.handleSelectAttribute(index)}
+                            onClick={() => this.handleSelectAttribute(this.props.attributeId, item.value, index)}
                             key={index}
                         >
                             { item.value }

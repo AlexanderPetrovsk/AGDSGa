@@ -10,10 +10,20 @@ class Colors extends Component {
 
     }
     
-    handleSelectAttribute(id) {
+    handleSelectAttribute(id, value, index) {
+        this.props.onHandleAttributeChange(id, value);
+
         this.setState({
-            selectedAttribute: id
+            selectedAttribute: index
         });
+    }
+
+    componentDidMount() {
+        if (this.props.selectedAttribute) {
+            this.setState({
+                selectedAttribute: this.props.sizes.findIndex(size => size.value === this.props.selectedAttribute.value)
+            });
+        }
     }
 
     getColorWrapperClasses(index) {
@@ -29,7 +39,7 @@ class Colors extends Component {
                             <div
                                 className="color-option"
                                 style={{ backgroundColor: item.value }}
-                                onClick={() => this.handleSelectAttribute(index)}
+                                onClick={() => this.handleSelectAttribute(this.props.attributeId, item.value, index)}
                             />
                         </div>
                     )

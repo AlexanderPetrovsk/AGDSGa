@@ -11,8 +11,12 @@ class ProductDetails extends Component {
 
         this.state = {
             product: data.data.products.find(item => item.id === window.location.href.split('/')[4]),
-            currentPhoto: 0
+            currentPhoto: 0,
+            selectedAttributes: []
         }
+
+        this.handleChangeAttribute = this.handleChangeAttribute.bind(this);
+        this.handleAddToCart = this.handleAddToCart.bind(this);
     }
     
     handleSelectPhoto(id) {
@@ -53,9 +57,9 @@ class ProductDetails extends Component {
         switch(id) {
             case 'Capacity':
             case 'Size':
-                return <Sizes sizes={items} />
+                return <Sizes sizes={items} attributeId={id} onHandleAttributeChange={this.handleChangeAttribute} />
             case 'Color':
-                return <Colors sizes={items} />
+                return <Colors sizes={items} attributeId={id} onHandleAttributeChange={this.handleChangeAttribute} />
             default:
                 break;
         }
@@ -67,6 +71,28 @@ class ProductDetails extends Component {
 
     descriptionParser() {
         document.querySelector('.product-details-description').innerHTML = this.state.product.description;
+    }
+
+    handleAddToCart() {
+        this.props.onAddToCart(this.state.product, this.state.selectedAttributes);
+    }
+
+    handleChangeAttribute(attributeId, value) {
+        const selectedAttributes = [...this.state.selectedAttributes];
+        const existingAttribute = selectedAttributes.findIndex(attribute => attribute.id === attributeId);
+
+        if (existingAttribute >= 0) {
+            selectedAttributes.splice(existingAttribute, 1);
+        }
+
+        selectedAttributes.push({
+            id: attributeId,
+            value
+        });
+
+        this.setState({
+            selectedAttributes
+        });
     }
 
     componentDidMount() {
@@ -121,7 +147,7 @@ class ProductDetails extends Component {
                                 { this.state.product.prices[0].currency.symbol }{ this.state.product.prices[0].amount }
                             </div>
                         </div>
-                        <button className="product-details-add-button" data-testid='add-to-cart'>ADD TO CART</button>
+                        <button className="product-details-add-button" data-testid='add-to-cart' onClick={() => this.handleAddToCart() }>ADD TO CART</button>
                         <div className="product-details-description" data-testid='product-description'>
                             { this.state.product.description }
                         </div>
