@@ -43,6 +43,21 @@ body {
   flex-basis: 100%;
   justify-content: flex-end;
 }
+
+.cart-logo {
+  position:relative;
+}
+
+.bubble-count {
+	position:absolute;
+	top: 6px;
+	right: 30px;
+	color:#fff;
+	font-size:12px;
+	background:rgba(198,28,32,0.7);
+	padding:0px 5px;
+	border-radius:5px;
+}
 /*header*/
 
 /*product*/

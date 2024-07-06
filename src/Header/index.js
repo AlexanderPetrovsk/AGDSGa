@@ -80,6 +80,16 @@ class Header extends Component {
 
         return total;
     }
+
+    componentDidMount() {
+        const dialog = document.getElementsByTagName('dialog')[0];
+
+        dialog.addEventListener('click', (event) => {
+            if (event.target.id !== 'my-div') {
+                dialog.close();
+            }
+        });
+    }
     render() {
         return (
             <div className="header-container">
@@ -118,10 +128,11 @@ class Header extends Component {
                         src={cartLogo}
                         alt=""
                     />
+                    {this.props.selectedProducts.length > 0 ? <span class="bubble-count" data-testid="cart-count-bubble">{this.props.selectedProducts.length}</span> : ''}
                 </div>
                 
                 <dialog >
-                    <div className="cart-overlay" data-testid='cart-btn'>
+                    <div className="cart-overlay" data-testid='cart-btn' id="my-div">
                         My bag {this.getNmItemsText()}
                         {this.props.selectedProducts.map((product, index) => {
                             return (
