@@ -1,5 +1,4 @@
 import { Component } from "react";
-import { toKebabCase } from "../../services/common";
 
 class Colors extends Component {
     constructor(props) {
