@@ -30,12 +30,12 @@ class Sizes extends Component {
         }
     }
     
-    dataTestId(itemValue, index) {
+    dataTestId(itemValue, itemId, index) {
         if (this.props.usedIn === 'cart') {
-            return `cart-item-attribute-size-${itemValue}${index === this.state.selectedAttribute ? '-selected' : ''}`;
+            return `cart-item-attribute-${itemId.toLowerCase()}-${itemValue}${index === this.state.selectedAttribute ? '-selected' : ''}`;
         }
 
-        return `product-attribute-size-${itemValue}${index === this.state.selectedAttribute ? '-selected' : ''}`;
+        return `product-attribute-${itemId.toLowerCase()}-${itemValue}${index === this.state.selectedAttribute ? '-selected' : ''}`;
     }
 
     render() {
@@ -47,7 +47,7 @@ class Sizes extends Component {
                             className={this.getSizeOptionClasses(index)}
                             onClick={() => this.handleSelectAttribute(this.props.attributeId, item.value, index)}
                             key={index}
-                            data-testid={this.dataTestId(item.displayValue, index)}
+                            data-testid={this.dataTestId(item.displayValue, item.id, index)}
                         >
                             { item.value }
                         </div>
