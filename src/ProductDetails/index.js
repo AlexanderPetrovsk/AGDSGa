@@ -85,7 +85,7 @@ class ProductDetails extends Component {
     }
 
     handleAddToCart() {
-        document.getElementsByTagName('dialog')[0].showModal();
+        // document.getElementsByTagName('dialog')[0].showModal();
         this.props.onAddToCart(this.state.product, this.state.selectedAttributes);
     }
 
