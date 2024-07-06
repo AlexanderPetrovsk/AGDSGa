@@ -73,7 +73,7 @@ class ProductsList extends Component {
                                         { product.name }
                                     </div>
                                     <div className="product-price">
-                                        { product.prices[0].currency.symbol }{ product.prices[0].amount }
+                                        { product.prices[0].currency.symbol } { product.prices[0].amount }
                                     </div>
                                 </div>
                             </Link>

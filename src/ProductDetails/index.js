@@ -156,7 +156,7 @@ class ProductDetails extends Component {
                         <div className="product-details-prices-container">
                             <div className="attribute-title">PRICE:</div>
                             <div className="product-details-price">
-                                { this.state.product.prices[0].currency.symbol }{ this.state.product.prices[0].amount }
+                                { this.state.product.prices[0].currency.symbol } { this.state.product.prices[0].amount }
                             </div>
                         </div>
                         <button
