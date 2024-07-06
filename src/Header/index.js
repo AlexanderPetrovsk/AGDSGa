@@ -83,9 +83,10 @@ class Header extends Component {
 
     componentDidMount() {
         const dialog = document.getElementsByTagName('dialog')[0];
-
+        const parent = document.getElementById('my-div');
+        
         dialog.addEventListener('click', (event) => {
-            if (event.target.id !== 'my-div') {
+            if (!parent.contains(event.target)) {
                 dialog.close();
             }
         });
@@ -128,7 +129,7 @@ class Header extends Component {
                         src={cartLogo}
                         alt=""
                     />
-                    {this.props.selectedProducts.length > 0 ? <span class="bubble-count" data-testid="cart-count-bubble">{this.props.selectedProducts.length}</span> : ''}
+                    {this.props.selectedProducts.length > 0 ? <span className="bubble-count" data-testid="cart-count-bubble">{this.props.selectedProducts.length}</span> : ''}
                 </div>
                 
                 <dialog >
