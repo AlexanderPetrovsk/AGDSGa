@@ -120,51 +120,52 @@ class Header extends Component {
                     />
                 </div>
                 
-                <dialog>
-                    My bag {this.getNmItemsText()}
-                    {this.props.selectedProducts.map((product, index) => {
-                        return (
-                            <div className="selected-item-container" key={index}>
-                                <div className="selected-item-details">
-                                    <div className="selected-item-name">
-                                        {product.name}
+                <dialog >
+                    <div className="cart-overlay" data-testid='cart-btn'>
+                        My bag {this.getNmItemsText()}
+                        {this.props.selectedProducts.map((product, index) => {
+                            return (
+                                <div className="selected-item-container" key={index}>
+                                    <div className="selected-item-details">
+                                        <div className="selected-item-name">
+                                            {product.name}
+                                        </div>
+                                        <div className="selected-item-price">
+                                            { product.prices[0].currency.symbol }{ product.prices[0].amount }
+                                        </div>
+                                        <div className="selected-item-attributes">
+                                            {product.attributes.map((attribute, index) => {
+                                                return (
+                                                    <div
+                                                        className="product-details-attribute"
+                                                        key={index}
+                                                        data-testid={`cart-item-attribute-${toKebabCase(attribute.name)}`}
+                                                    >
+                                                        <div className="attribute-title">{ attribute.id.toUpperCase() }:</div>
+                                                        {this.renderAttributes(attribute.id, attribute.items, index, product.selectedAttributes)}
+                                                    </div>
+                                                )
+                                            })}
+                                        </div>
                                     </div>
-                                    <div className="selected-item-price">
-                                        { product.prices[0].currency.symbol }{ product.prices[0].amount }
+                                    <div className="quantity-container">
+                                        <div className="quantity-option" onClick={ () => this.handleQuantityClick(index, 'add') } data-testid='cart-item-amount-increase'>
+                                            +
+                                        </div>
+                                        <div className="cart-item-amount" data-testid='cart-item-amount'>
+                                            { product.quantity }
+                                        </div>
+                                        <div className="quantity-option" onClick={ () => this.handleQuantityClick(index, 'remove') } data-testid='cart-item-amount-decrease'>
+                                            -
+                                        </div>
                                     </div>
-                                    <div className="selected-item-attributes">
-                                        {product.attributes.map((attribute, index) => {
-                                            return (
-                                                <div
-                                                    className="product-details-attribute"
-                                                    key={index}
-                                                    data-testid={`cart-item-attribute-${toKebabCase(attribute.name)}`}
-                                                >
-                                                    <div className="attribute-title">{ attribute.id.toUpperCase() }:</div>
-                                                    {this.renderAttributes(attribute.id, attribute.items, index, product.selectedAttributes)}
-                                                </div>
-                                            )
-                                        })}
-                                    </div>
+                                    <img className="selected-item-image" src={this.getProductImage(product)} alt="" />
                                 </div>
-                                <div className="quantity-container">
-                                    <div className="quantity-option" onClick={ () => this.handleQuantityClick(index, 'add') } data-testid='cart-item-amount-increase'>
-                                        +
-                                    </div>
-                                    <div className="cart-item-amount" data-testid='cart-item-amount'>
-                                        { product.quantity }
-                                    </div>
-                                    <div className="quantity-option" onClick={ () => this.handleQuantityClick(index, 'remove') } data-testid='cart-item-amount-decrease'>
-                                        -
-                                    </div>
-                                </div>
-                                <img className="selected-item-image" src={this.getProductImage(product)} alt="" />
-                            </div>
-                        )
-                    })}
-                    <div className="cart-total" data-testid="cart-total">{this.cartTotal()}</div>
-                    <div className="place-order-btn">Place Order</div>
-
+                            )
+                        })}
+                        <div className="cart-total" data-testid="cart-total">{this.cartTotal()}</div>
+                        <div className="place-order-btn">Place Order</div>
+                    </div>
                 </dialog>
             </div>
         )

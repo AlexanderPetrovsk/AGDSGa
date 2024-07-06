@@ -33,10 +33,10 @@ class Sizes extends Component {
     
     dataTestId(itemValue, index) {
         if (this.props.usedIn === 'cart') {
-            return `cart-item-attribute-size-${toKebabCase(itemValue)}${index === this.state.selectedAttribute ? '-selected' : ''}`;
+            return `cart-item-attribute-size-${itemValue}${index === this.state.selectedAttribute ? '-selected' : ''}`;
         }
 
-        return `product-attribute-size-${toKebabCase(itemValue)}${index === this.state.selectedAttribute ? '-selected' : ''}`;
+        return `product-attribute-size-${itemValue}${index === this.state.selectedAttribute ? '-selected' : ''}`;
     }
 
     render() {
