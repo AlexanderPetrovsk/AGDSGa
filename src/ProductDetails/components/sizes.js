@@ -5,7 +5,7 @@ class Sizes extends Component {
         super(props);
 
         this.state = {
-            selectedAttribute: 0
+            selectedAttribute: null
         }
 
     }
