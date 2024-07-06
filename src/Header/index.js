@@ -22,7 +22,7 @@ class Header extends Component {
     getNmItemsText() {
         let text = `${this.props.selectedProducts.length} item`;
 
-        if (this.props.selectedProducts.length > 1) {
+        if (this.props.selectedProducts.length !== 1) {
             text += 's';
         }
 
