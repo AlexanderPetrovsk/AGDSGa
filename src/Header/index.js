@@ -1,4 +1,4 @@
-import { Component, act } from "react";
+import { Component } from "react";
 import Sizes from "../ProductDetails/components/sizes";
 import { Link } from "react-router-dom";
 import Colors from "../ProductDetails/components/colors";
