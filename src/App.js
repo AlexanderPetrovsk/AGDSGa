@@ -172,8 +172,8 @@ class App extends Component {
     })
   }
 
-  async componentDidMount() {
-    await this.getProducts();
+  componentDidMount() {
+    this.getProducts();
   }
 
   getFilteredProducts() {
