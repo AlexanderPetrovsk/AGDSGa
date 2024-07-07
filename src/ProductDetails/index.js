@@ -163,7 +163,7 @@ class ProductDetails extends Component {
                             className="product-details-add-button"
                             data-testid='add-to-cart'
                             onClick={() => this.handleAddToCart() }
-                            disabled={!this.state.product.inStock && this.state.selectedAttributes.length !== this.state.product.attributes.length}
+                            disabled={this.state.selectedAttributes.length !== this.state.product.attributes.length}
                         >
                             ADD TO CART
                         </button>

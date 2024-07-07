@@ -66,8 +66,8 @@ class ProductsList extends Component {
                                     onMouseEnter={() => this.handleCardHover(true, index)}
                                     onMouseLeave={() => this.handleCardHover(false, index)}
                                 >
-                                    <img className={`product-image ${!parseInt(product.inStock) ? 'out-of-stock' : ''}`} src={this.getProductImage(product)} alt="" />
-                                    { !parseInt(product.inStock) ? <div className="centered">OUT OF STOCK</div> : ''}
+                                    <img className={`product-image ${!product.inStock ? 'out-of-stock' : ''}`} src={this.getProductImage(product)} alt="" />
+                                    { !product.inStock ? <div className="centered">OUT OF STOCK</div> : ''}
                                     { this.getCartButton(product, index) }
                                     <div className="product-name">
                                         { product.name }
