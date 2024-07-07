@@ -117,59 +117,59 @@ class App extends Component {
     product.selectedAttributes = selectedAttributes;
   }
 
-  async getProducts() {
+  getProducts() {
     this.setState({
       products: data.data.products
     });
 
-    const res = await fetch('https://ackata.000webhostapp.com/graphql', {
-      method: 'POST',
-      body: JSON.stringify({
-        query: `
-          query {
-            getProducts
-            {
-              id, 
-              name,
-              inStock,
-              gallery,
-              description,
-              category,
-              brand,
-              __typename,
-              attributes {
-                  id,
-                  name,
-                  items {
-                      displayValue,
-                      value,
-                      id,
-                      __typename
-                  },
-                  type,
-                  __typename
-              },
-              prices {
-                  id,
-                  amount,
-                  __typename,
-                  currency {
-                      id,
-                      label,
-                      symbol
-                  },
-              }
-            }
-          }
-        `
-      })
-    });
+    // const res = await fetch('https://ackata.000webhostapp.com/graphql', {
+    //   method: 'POST',
+    //   body: JSON.stringify({
+    //     query: `
+    //       query {
+    //         getProducts
+    //         {
+    //           id, 
+    //           name,
+    //           inStock,
+    //           gallery,
+    //           description,
+    //           category,
+    //           brand,
+    //           __typename,
+    //           attributes {
+    //               id,
+    //               name,
+    //               items {
+    //                   displayValue,
+    //                   value,
+    //                   id,
+    //                   __typename
+    //               },
+    //               type,
+    //               __typename
+    //           },
+    //           prices {
+    //               id,
+    //               amount,
+    //               __typename,
+    //               currency {
+    //                   id,
+    //                   label,
+    //                   symbol
+    //               },
+    //           }
+    //         }
+    //       }
+    //     `
+    //   })
+    // });
 
-    const result = await res.json();
+    // const result = await res.json();
 
-    this.setState({
-      products: result.data.getProducts
-    })
+    // this.setState({
+    //   products: result.data.getProducts
+    // })
   }
 
   componentDidMount() {

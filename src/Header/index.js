@@ -96,15 +96,15 @@ class Header extends Component {
             <div className="header-container">
                 <div className="header-categories">
                     <ul className="header-categories-list">
-                        {['all', 'tech', 'clothes'].map(category => {
+                        {this.props.categories.map(category => {
                             return (
-                                <Link to={category}
-                                    className={this.getCategoryItemClasses(category)}
-                                    onClick={(e) => this.handleCategoryClick(category, e)}
-                                    key={category}
-                                    data-testid={`${this.props.selectedCategory === category ? 'active-' : ''}category-link`}
+                                <Link to={category.name}
+                                    className={this.getCategoryItemClasses(category.name)}
+                                    onClick={(e) => this.handleCategoryClick(category.name, e)}
+                                    key={category.name}
+                                    data-testid={`${this.props.selectedCategory === category.name ? 'active-' : ''}category-link`}
                                 >
-                                    { category.toUpperCase() }
+                                    { category.name.toUpperCase() }
                                 </Link>
                             )
                         })}
