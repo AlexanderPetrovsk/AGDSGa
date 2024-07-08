@@ -34,7 +34,7 @@ class ProductsList extends Component {
         if (
             this.state.showCartButton
             && this.state.currentProduct === index
-            && parseInt(product.inStock)
+            && product.inStock
         ) {
             return (
                 <img
@@ -59,7 +59,7 @@ class ProductsList extends Component {
                 <div className="product-cards-container">
                     {this.props.products.map((product, index) => {
                         return (
-                            <Link to={'products/' + product.id}  key={product.id}>
+                            <Link to={'products/' + product.id + '/' + product.productId}  key={product.id}>
                                 <div
                                     className="product-card-container"
                                     data-testid={`product-${toKebabCase(product.name)}`}

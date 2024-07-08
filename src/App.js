@@ -5,6 +5,7 @@ import Header from './Header/index';
 import ProductsList from './ProductsList';
 import ProductDetails from './ProductDetails';
 import { Routes, Route } from 'react-router-dom';
+import { getProducts } from './services/apiCalls';
 
 class App extends Component {
   constructor() {
@@ -66,6 +67,7 @@ class App extends Component {
     }
 
     selectedProds.push({
+      productId: product.productId,
       id: product.id,
       name: product.name,
       quantity: 1,
@@ -122,54 +124,13 @@ class App extends Component {
       products: data.data.products
     });
 
-    const res = await fetch('https://ackata.000webhostapp.com/graphql', {
-      method: 'POST',
-      body: JSON.stringify({
-        query: `
-          query {
-            getProducts
-            {
-              id, 
-              name,
-              inStock,
-              gallery,
-              description,
-              category,
-              brand,
-              __typename,
-              attributes {
-                  id,
-                  name,
-                  items {
-                      displayValue,
-                      value,
-                      id,
-                      __typename
-                  },
-                  type,
-                  __typename
-              },
-              prices {
-                  id,
-                  amount,
-                  __typename,
-                  currency {
-                      id,
-                      label,
-                      symbol
-                  },
-              }
-            }
-          }
-        `
+    const result = await getProducts();
+
+    if (result) {
+      this.setState({
+        products: result.data.getProducts
       })
-    });
-
-    const result = await res.json();
-
-    this.setState({
-      products: result.data.getProducts
-    })
+    }
   }
 
   componentDidMount() {
@@ -204,7 +165,7 @@ class App extends Component {
               />
             }
           />
-          <Route path='/products/:productId' element={ <ProductDetails onAddToCart={this.handleSelectProduct} />} />
+          <Route path='/products/:id/:productId' element={ <ProductDetails products={this.state.products} onAddToCart={this.handleSelectProduct} />} />
         </Routes>
       </div>
     )

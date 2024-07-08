@@ -1,6 +1,6 @@
 import { Component } from "react";
-import data from "../data.json";
 import Sizes from "./components/sizes";
+import data from "../data.json";
 import Colors from "./components/colors";
 import { toKebabCase } from "../services/common";
 import leftArrow from "../assets/left-arrow.svg";
@@ -85,7 +85,11 @@ class ProductDetails extends Component {
     }
 
     handleAddToCart() {
-        // document.getElementsByTagName('dialog')[0].showModal();
+
+        this.setState({
+            product: Object.assign(this.state.product, { productId: parseInt(window.location.href.split('/')[5]) })
+        });
+        
         this.props.onAddToCart(this.state.product, this.state.selectedAttributes);
     }
 

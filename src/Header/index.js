@@ -5,6 +5,7 @@ import cartLogo from "../assets/cart-logo.svg";
 import Sizes from "../ProductDetails/components/sizes";
 import Colors from "../ProductDetails/components/colors";
 import { toKebabCase } from "../services/common";
+import { placeOrder } from "../services/apiCalls";
 
 class Header extends Component {
     handleCartClick() {
@@ -79,6 +80,12 @@ class Header extends Component {
         });
 
         return total.toFixed(2);
+    }
+
+    handlePlaceOrder() {
+        this.props.selectedProducts.forEach(order => {
+            placeOrder(order);
+        });
     }
 
     componentDidMount() {
@@ -175,8 +182,12 @@ class Header extends Component {
                                 </div>
                             )
                         })}
-                        <div className="cart-total" data-testid="cart-total">{this.cartTotal()}</div>
-                        <div className="place-order-btn" data-testid="place-order-btn">Place Order</div>
+                        <div className="cart-total" data-testid="cart-total">
+                            {this.cartTotal()}
+                        </div>
+                        <div className="place-order-btn" data-testid="place-order-btn" onClick={() => this.handlePlaceOrder() }>
+                            Place Order
+                        </div>
                     </div>
                 </dialog>
             </div>
