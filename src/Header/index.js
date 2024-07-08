@@ -86,6 +86,9 @@ class Header extends Component {
         this.props.selectedProducts.forEach(order => {
             placeOrder(order);
         });
+
+        this.props.onPlaceOrder();
+        document.getElementsByTagName('dialog')[0].close();
     }
 
     componentDidMount() {

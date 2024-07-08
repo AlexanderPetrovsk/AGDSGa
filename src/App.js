@@ -21,6 +21,7 @@ class App extends Component {
     this.handleSelectProduct = this.handleSelectProduct.bind(this);
     this.handleQuantityClick = this.handleQuantityClick.bind(this);
     this.handleAttributeChangeInCart = this.handleAttributeChangeInCart.bind(this);
+    this.handlePlaceOrder = this.handlePlaceOrder.bind(this);
   }
 
   handleCategoryClick(categoryName) {
@@ -145,6 +146,12 @@ class App extends Component {
     return this.state.products;
   }
 
+  handlePlaceOrder() {
+    this.setState({
+      selectedProducts: []
+    });
+  }
+
   render() {
     return (
       <div>
@@ -155,6 +162,7 @@ class App extends Component {
           onQuantityClick={this.handleQuantityClick}
           onCategoryClick={this.handleCategoryClick}
           onChangeAttribute={this.handleAttributeChangeInCart}
+          onPlaceOrder={this.handlePlaceOrder}
         />
         <Routes>
           <Route path='/*' element={
