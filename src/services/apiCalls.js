@@ -48,7 +48,6 @@ const getProducts = async () => {
 
 
 const placeOrder = async (order) => {
-    console.log(order);
     const res = await fetch('https://ackata.000webhostapp.com/graphql', {
         method: 'POST',
         body: JSON.stringify({
